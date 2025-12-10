@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+employee payroll calculation
+</title>
+</head>
+<body>
+<h1> employee information form</h1>
+<form id="employeeform"> <!-- corrected idd to id -->
+<label for="basicpay"> Basic Pay:</label>
+<input type="number" id="basicpay" name="basicpay"><br>
+<input type="button" value="calculate" onclick="calculatepay()">
+</form>
+<h2> payroll details</h2>
+<p id="result"></p>
+<script>
+function calculatepay()
+{
+const basicpay = parseFloat(document.getElementById('basicpay').value);
+const DA_PERCENT = 20;
+const HRA_PERCENT = 15;
+const PF_PERCENT = 12;
+const TAX_PERCENT = 10;
+const DA = basicpay * (DA_PERCENT / 100);
+const HRA = basicpay * (HRA_PERCENT / 100);
+const PF = basicpay * (PF_PERCENT / 100);
+const Grosspay = basicpay + DA + HRA;
+const Tax = Grosspay * (TAX_PERCENT / 100);
+const deduction = PF + Tax;
+const netpay = Grosspay - deduction;
+const resultdiv = document.getElementById('result');
+resultdiv.innerHTML =
+`<strong>basic pay:</strong> ${basicpay.toFixed(2)}<br>
+<strong>da:</strong> ${DA.toFixed(2)}<br>
+<strong>hra:</strong> ${HRA.toFixed(2)}<br>
+<strong>gross pay:</strong> ${Grosspay.toFixed(2)}<br>
+<strong>pf:</strong> ${PF.toFixed(2)}<br>
+<strong>tax:</strong> ${Tax.toFixed(2)}<br>
+<strong>total deductions:</strong> ${deduction.toFixed(2)}<br>
+<strong>net pay:</strong> ${netpay.toFixed(2)}`;
+}
+</script>
+</body>
+</html>
